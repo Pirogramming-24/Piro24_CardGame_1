@@ -16,7 +16,8 @@ def select_five_cards():
     selected_numbers.sort()
     return selected_numbers
 
-def generateGame(request,pk):
+def generateGame(request):
+    pk = request.user.pk
     if 'five_cards' not in request.session:
         print('new')
         request.session['five_cards'] = select_five_cards()
@@ -42,7 +43,7 @@ def generateGame(request,pk):
             print("카드를 선택해주세요")
             return redirect(request.path)
 
-        Attacker = User.objects.get(id=pk)
+        Attacker = request.user
         Defender = User.objects.get(id=defender_id)
         isBiggerScoreWin = rd.choice([True,False])
         isGameOngoing = True
@@ -55,12 +56,13 @@ def generateGame(request,pk):
         )
         del request.session['five_cards']
         print('delete')
-        return redirect('games:gameList',pk=pk)
+        return redirect('games:gameList')
     
     return render(request,'games/startPage.html',context)
 
 
-def gameList(request,pk):
+def gameList(request):
+    pk = request.user.pk
     Games = Game.objects.all()
     context = {
         'Games':Games,
@@ -72,7 +74,7 @@ def gameList(request,pk):
         print(game_id)
         game_DB = Game.objects.get(id=game_id)
         game_DB.delete()
-        return redirect('games:gameList',pk=pk)
+        return redirect('games:gameList')
     return render(request,'games/gameList.html',context)
 
 def ranking(request):
@@ -147,7 +149,9 @@ def counter_attack(request, pk) :
             game.save()
 
         return redirect('games:detail', pk=pk)
-    
+    else :
+        context = {'game': game}
+        return render(request, 'games/gameCounter.html', context)
     # POST 요청이 아니면 상세 페이지로 리다이렉트
     return redirect('games:detail', pk=pk)
 
