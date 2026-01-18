@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+
+    <!-- Header / Navigation -->
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+    <!-- Page specific CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- ===== Header / Navigation ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="{% url 'games:main' %}">Card Game</a>
+            </div>
+
+            <nav class="nav">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'games:start' %}" class="nav-btn">게임하기</a>
+                    <a href="{% url 'games:list' %}" class="nav-btn">게임목록</a>
+                    <a href="{% url 'games:ranking' %}" class="nav-btn">랭킹보기</a>
+                    <a href="{% url 'accounts:logout' %}" class="nav-btn">로그아웃</a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="nav-btn">로그인</a>
+                    <a href="{% url 'accounts:signup' %}" class="nav-btn">회원가입</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>
