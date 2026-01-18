@@ -18,10 +18,10 @@
                 <span>{{game.Attacker}} vs {{game.Defender}}</span>
                 {%if game.isGameOngoing%}
                     {%if game.Attacker.id == user_id%}
-                        <span>/취소하기</span>
+                        <span>/게임 진행 중</span>
                         <form method="POST">
                             {%csrf_token%}
-                            <button type="submit" name="btn" value={{game.id}}>취소하기</button>
+                            <button type="submit" name="btn" value={{game.id}}>게임 취소</button>
                         </form>
                     {%else%}
                         <span>/반격하기</span>
