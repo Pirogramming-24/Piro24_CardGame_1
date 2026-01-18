@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    'allauth.socialaccount.providers.kakao',
+    'allauth.socialaccount.providers.google',
 ]
 
 SITE_ID=1
@@ -134,3 +134,31 @@ AUTHENTICATION_BACKENDS=(
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# 소셜 로그인 자동 회원가입 허용
+SOCIALACCOUNT_AUTO_SIGNUP = True
+
+# 회원가입 자체 허용
+ACCOUNT_ALLOW_REGISTRATION = True
+
+# 소셜 로그인 시 바로 로그인
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
