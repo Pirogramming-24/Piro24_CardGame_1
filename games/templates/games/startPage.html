@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartPage</title>
+</head>
+<body>
+    {%if messages%}
+    {%endif%}
+    <form method="POST">
+        {%csrf_token%}
+        {%for Card in fiveCards%}
+        <input type="radio" name="card_radio" id="Card{{Card.id}}" value={{Card}}>
+        <label for="Card{{Card.id}}">{{Card}}</label>
+        {%endfor%}
+        <br>
+        {%for defender in Defenders%}
+        <input type="radio" name="defender_radio" id="defender{{defender.id}}" value={{defender.id}}>
+        <label for="defender{{defender.id}}">{{defender.nickname}}</label>
+        {%endfor%}
+        <button type="submit" name="submit" value="submit">확인</button>
+    </form>
+</body>
+</html>
