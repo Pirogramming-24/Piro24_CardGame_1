@@ -63,7 +63,7 @@ def gameList(request,pk):
     context = {
         'Games':Games,
         'user_id':pk,
-        'user_name':User.objects.get(id=pk).nickname
+        'user_name':request.user.nickname
     }
     if request.method == "POST":
         game_id = request.POST.get('btn')
@@ -139,8 +139,22 @@ def counter_attack(request, pk) :
         return redirect('games:detail', pk=pk)
     
     # POST 요청이 아니면 상세 페이지로 리다이렉트
-    #return redirect('games:detail', pk=pk)
-    return render(request, 'games/test_counter.html', {'game': game})
+    return redirect('games:detail', pk=pk)
 
 def detail(request, pk):
-    return HttpResponse(f"게임 {pk}번 상세 페이지입니다.")
+    game = get_object_or_404(Game, pk=pk)
+
+    # case1. 종료된 게임
+    if not game.isGameOngoing :
+        # 게임 결과 정보 띄우기
+        return render(request, 'games/gameDetail.html', {'game': game, 'state': 'result'})
+    # 상황 2: 게임 진행 중 (Ongoing)
+    else:
+        if request.user == game.Attacker:
+            return render(request, 'games/gameDetail.html', {'game': game, 'state': 'waiting'})
+        
+        elif request.user == game.Defender:
+            return render(request, 'games/gameDetail.html', {'game': game, 'state': 'counter_ready'})
+
+    # url로 들어오려는 시도 제거
+    return redirect('games:list')
