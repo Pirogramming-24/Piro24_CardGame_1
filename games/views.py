@@ -4,6 +4,7 @@ from .models import Game
 from django.contrib import messages
 from django.shortcuts import redirect
 import random as rd
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -52,9 +53,22 @@ def generateGame(request,pk):
         )
         del request.session['five_cards']
         print('delete')
-        return redirect('games:test')
+        return redirect('games:gameList',pk=pk)
     
     return render(request,'games/startPage.html',context)
 
-def test(request):
-    return render(request,'games/test.html')
+
+def gameList(request,pk):
+    Games = Game.objects.all()
+    context = {
+        'Games':Games,
+        'user_id':pk,
+        'user_name':User.objects.get(id=pk).nickname
+    }
+    if request.method == "POST":
+        game_id = request.POST.get('btn')
+        print(game_id)
+        game_DB = Game.objects.get(id=game_id)
+        game_DB.delete()
+        return redirect('games:gameList',pk=pk)
+    return render(request,'games/gameList.html',context)

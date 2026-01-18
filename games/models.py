@@ -12,8 +12,8 @@ class Game(models.Model):
 
     # 2. 방어자 (Defender)
     Defender = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE, 
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
         related_name='defend_games'
     )
     # 처음엔 카드를 안 냈으니 비어있어야 함 (null=True)
@@ -28,8 +28,8 @@ class Game(models.Model):
     Winner = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE, 
-        null=True, 
-        blank=True, 
+        null=True,
+        blank=True,
         related_name='won_games'
     )
 
