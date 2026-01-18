@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>반격 하기</h1>
+    <h3>{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }}</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <p>반격 카드를 선택하세요:</p>
+        
+        {% with "1 2 3 4 5 6 7 8 9 10" as numbers %}
+            {% for num in numbers.split %}
+                <label>
+                    <input type="radio" name="selected_card" value="{{ num }}" required>
+                    {{ num }}
+                </label>
+            {% endfor %}
+        {% endwith %}
+
+        <br><br>
+
+        <button type="submit">반격하기</button>
+    </form>
+
+    <hr>
+    
+    <a href="{% url 'games:gameList' %}">전체 목록</a>
+
+{% endblock %}
