@@ -5,4 +5,5 @@ app_name = 'games'
 
 urlpatterns = [
     path('startPage/<int:pk>/',views.generateGame, name='startPage'),
+    path('test',views.test,name='test'),
 ]

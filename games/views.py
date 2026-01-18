@@ -52,5 +52,9 @@ def generateGame(request,pk):
         )
         del request.session['five_cards']
         print('delete')
+        return redirect('games:test')
     
     return render(request,'games/startPage.html',context)
+
+def test(request):
+    return render(request,'games/test.html')
