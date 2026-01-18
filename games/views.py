@@ -73,6 +73,14 @@ def gameList(request,pk):
         return redirect('games:gameList',pk=pk)
     return render(request,'games/gameList.html',context)
 
+def ranking(request):
+    users = User.objects.exclude(is_superuser=True).order_by('-score')
+    context = {
+        'users':users
+    }
+    return render(request,'games/ranking.html',context)
+
+
 
 # 1. 반격하기 기능
 def counter_attack(request, pk) :

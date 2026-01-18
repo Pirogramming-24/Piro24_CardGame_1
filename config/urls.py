@@ -19,7 +19,6 @@ from django.urls import path,include
 from .views import ranking
 
 urlpatterns = [
-    path("", ranking),
     path('admin/', admin.site.urls),
     path('accounts/',include('accounts.urls')),
     path('games/',include('games.urls')),
