@@ -1,18 +1,18 @@
 # --- 핵심 프레임워크 및 비동기 지원 ---
-Django==6.0.1           # 웹 프로젝트의 뼈대를 담당하는 메인 프레임워크
-asgiref==3.11.0         # Django의 비동기 기능을 지원하는 인터페이스 (Django 설치 시 필수 의존성)
-sqlparse==0.5.5         # SQL 문을 파싱하고 예쁘게 출력해주는 도구 (주로 개발 디버깅용)
-packaging==25.0         # 패키지 버전을 관리하고 호환성을 체크하는 내부 유틸리티
+Django==5.0.1           # 웹 프로젝트의 뼈대를 담당하는 메인 프레임워크
+asgiref==3.7.2         # Django의 비동기 기능을 지원하는 인터페이스 (Django 설치 시 필수 의존성)
+sqlparse==0.4.4         # SQL 문을 파싱하고 예쁘게 출력해주는 도구 (주로 개발 디버깅용)
+packaging==23.2         # 패키지 버전을 관리하고 호환성을 체크하는 내부 유틸리티
 
 # --- 인증 및 보안 (구글 로그인) ---
-django-allauth==65.14.0 # 구글/카카오 등 소셜 로그인 및 회원가입 기능을 제공하는 핵심 라이브러리
-django-environ==0.12.0  # .env 파일에서 구글 API 키 등 민감 정보를 읽어오는 환경변수 관리 도구
+django-allauth==0.61.1 # 구글/카카오 등 소셜 로그인 및 회원가입 기능을 제공하는 핵심 라이브러리
+django-environ==0.11.2  # .env 파일에서 구글 API 키 등 민감 정보를 읽어오는 환경변수 관리 도구
 
 # --- 배포 및 서버 운영 (Docker/Production) ---
-gunicorn==23.0.0        # Docker 컨테이너 안에서 Django 앱을 실행하는 고성능 웹 서버 엔진
-psycopg2-binary==2.9.11 # PostgreSQL 데이터베이스와 Django를 연결해주는 핵심 드라이버
-whitenoise==6.11.0      # Nginx 없이도 Docker 내에서 CSS, JS 등 정적 파일을 직접 서빙하게 해줌
+gunicorn==21.2.0        # Docker 컨테이너 안에서 Django 앱을 실행하는 고성능 웹 서버 엔진
+psycopg2-binary==2.9.9 # PostgreSQL 데이터베이스와 Django를 연결해주는 핵심 드라이버
+whitenoise==6.6.0      # Nginx 없이도 Docker 내에서 CSS, JS 등 정적 파일을 직접 서빙하게 해줌
 redis==7.1.0            # 캐싱, 세션 관리, 또는 실시간 알림 기능을 위한 인메모리 데이터 저장소 클라이언트
 
 # --- 개발 편의 도구 ---
-django-extensions==4.1  # 모델 시각화, 개선된 쉘(shell_plus) 등 유용한 관리 명령어를 추가해줌
+django-extensions==3.2.3  # 모델 시각화, 개선된 쉘(shell_plus) 등 유용한 관리 명령어를 추가해줌
