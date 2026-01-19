@@ -26,47 +26,40 @@
   </div>
 </header>
 
-<main class="ranking-page">
-  <div class="container">
+<div class="ranking">
+  <main class="ranking-page">
+    <div class="container">
 
-    <h1 class="page-title">TOP 3</h1>
+      <h1 class="page-title">TOP 3</h1>
 
-    <div class="top3">
-      {% for player in users %}
-      <div class="top-card rank-{{ forloop.counter }}">
-        <div class="rank-icon">
-          {% if forloop.counter == 1 %}🥇
-          {% elif forloop.counter == 2 %}🥈
-          {% else %}🥉{% endif %}
+      <div class="top3">
+        {% for player in users %}
+        <div class="top-card">
+          <div class="rank-icon">
+            {% if forloop.counter == 1 %}🥇
+            {% elif forloop.counter == 2 %}🥈
+            {% else %}🥉{% endif %}
+          </div>
+          <div class="nickname">{{ player.nickname }}</div>
+          <div class="score">{{ player.score }}점</div>
         </div>
-        <div class="nickname">{{ player.nickname }}</div>
-        <div class="score">{{ player.score }}점</div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
 
-    <div class="full-ranking">
       <h2 class="section-title">전체 랭킹</h2>
 
       <div class="ranking-list">
         {% for player in users %}
         <div class="ranking-row {% if player.rank <= 3 %}top-bg{% endif %}">
           <div class="ranking-left">
-            <span class="rank-num">#{{forloop.counter}} {{ player.rank }}</span>
-            <div>
-              <div class="nickname">{{ player.nickname }}</div>
-              {% if player.rank <= 3 %}
-              {% endif %}
-            </div>
+            <span class="rank-num">#{{ forloop.counter }}</span>
+            <div class="nickname">{{ player.nickname }}</div>
           </div>
-          <div class="ranking-score">{{ player.score}}점</div>
+          <div class="ranking-score">{{ player.score }}점</div>
         </div>
         {% endfor %}
       </div>
+
     </div>
-
-  </div>
-</main>
-
-</body>
-</html>
+  </main>
+</div>
