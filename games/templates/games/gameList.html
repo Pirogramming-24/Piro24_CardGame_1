@@ -8,8 +8,8 @@
 <body>
     <h3>게임 목록</h3>
     <h5>현재 플레이어:{{user_name}}</h5>
-    <a href="{%url 'games:startPage' 2%}">Minsu</a>
-    <a href="{%url 'games:startPage' 3%}">chanwoong</a>
+    <a href="{%url 'games:startPage'%}">Minsu</a>
+    <a href="{%url 'games:startPage'%}">chanwoong</a>
     {%for game in Games%}
         {%if game.Attacker.id == user_id or game.Defender.id == user_id%}
         <div class="game_box">
