@@ -10,7 +10,7 @@
     <div class="auth-card">
         <form method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
-            {{ form.errors }}
+            {{form.errors}}
             <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="username" required>
