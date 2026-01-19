@@ -83,9 +83,11 @@ def gameList(request):
     return render(request,'games/gameList.html',context)
 
 def ranking(request):
+    top_users = User.objects.exclude(is_superuser=True).order_by('-score')[:3]
     users = User.objects.exclude(is_superuser=True).order_by('-score')
     context = {
-        'users':users
+        'users':users,
+        'top_users':top_users
     }
     return render(request,'games/ranking.html',context)
 
