@@ -35,7 +35,11 @@
                         {% if game.Winner.id == user_id %}
                             <span class="status_text result_win">/ 👑승리👑</span>
                         {% else %}
-                            <span class="status_text result_lose">/ 😵패배😵</span>
+                            {% if game.AttackerCard == game.DefenderCard %}
+                                <span class="status_text result_draw">/ 무승부</span>
+                            {% else %}
+                                <span class="status_text result_lose">/ 😵패배😵</span>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 </div>
