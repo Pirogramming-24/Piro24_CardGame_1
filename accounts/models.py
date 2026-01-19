@@ -7,5 +7,5 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         if not self.nickname:
-            self.nickname=f"User_{self.username}"
+            self.nickname=f"{self.username}"
         super().save(*args, **kwargs)

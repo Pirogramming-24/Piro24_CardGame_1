@@ -137,15 +137,13 @@ AUTHENTICATION_BACKENDS=(
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+
 SOCIALACCOUNT_PROVIDERS = {
+    'naver': {
+        'SCOPE': ['email', 'nickname'],
+    },
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
+        'SCOPE': ['email', 'profile'],
     }
 }
 
@@ -173,3 +171,9 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 LOGIN_REDIRECT_URL = 'games:main'
 
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# settings.py
+SOCIALACCOUNT_ADAPTER = 'accounts.adapters.CustomSocialAccountAdapter'
+
+# 추가로 이 설정을 넣어주면 중복될 경우 뒤에 숫자를 붙여서라도 생성해줍니다.
+SOCIALACCOUNT_QUERY_EMAIL = True
