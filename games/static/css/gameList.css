@@ -18,9 +18,70 @@ body {
     font-weight: 800;
 }
 
+/* 1. 상단 상태바 전체 */
+.My_status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5d4e37;
+    padding: 12px 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(93, 78, 55, 0.15);
+    margin-bottom: 20px;
+}
+
 .current_player {
-    color: #8c7b65;
-    margin-bottom: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff; /* 흰색으로 반전 */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 2. 점수 캡슐 컨테이너 */
+.score_container {
+    display: inline-flex; 
+    align-items: center; /* baseline 대신 center로 잡고 미세조정하는 게 더 정확할 때가 많습니다 */
+    background-color: #5d4e37; 
+    padding: 8px 20px;
+    border-radius: 50px;
+    gap: 6px; 
+}
+
+/* 3. MY SCORE 라벨 */
+#Seungu{
+    filter: brightness(0) invert(1);
+}
+
+.score_label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+}
+
+/* 4. 점수 숫자 (가장 크게) */
+.score_value {
+    color: #ffde59;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1;
+    font-family: 'Arial Black', sans-serif;
+    display: inline-block;
+}
+
+/* 5. pts 단위 */
+.score_unit {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+    position: relative;
+    top: 1px;
 }
 
 /* 2. 게임 카드 개별 박스 */
