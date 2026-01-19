@@ -1,30 +1,47 @@
 {% extends 'base.html' %}
 
+{% block header%} 
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/gameCounter.css' %}">
+
+{% endblock %}
+
 {% block content %}
+
+<div class="main_container">
+
     <h1>반격 하기</h1>
-    <h3>{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }}</h3>
+    <h3>카드를 선택하고 반격하세요</h3>
 
-    <form method="POST">
-        {% csrf_token %}
-        
-        <p>반격 카드를 선택하세요:</p>
-        
-        {% with "1 2 3 4 5 6 7 8 9 10" as numbers %}
-            {% for num in numbers.split %}
-                <label>
-                    <input type="radio" name="selected_card" value="{{ num }}" required>
-                    {{ num }}
+    <div class="game_info">
+
+        <h3>{{game.pk}}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
+        <hr>
+        <form method="POST" class="game_box">
+            {% csrf_token %}
+            
+            <p>반격 카드를 선택하세요:</p>
+            
+            
+            <div class="cards">
+                {% for card in fiveCards %}
+                <label>   
+                    <input type="radio" name="selected_card" value="{{ card }}" required>
+                    {{ card }}
                 </label>
-            {% endfor %}
-        {% endwith %}
+                {% endfor %}
+            </div>
+            
+            <div class="buttons">
+                <button type="submit">반격하기</button>
+                <a href="{% url 'games:gameList' %}" class="gameList">전체 목록</a>
+            </div>
+       </form>
 
-        <br><br>
-
-        <button type="submit">반격하기</button>
-    </form>
-
-    <hr>
+        
+    </div>
     
-    <a href="{% url 'games:gameList' %}">전체 목록</a>
-
+</div>
+    
 {% endblock %}
