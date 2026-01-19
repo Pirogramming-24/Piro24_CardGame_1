@@ -19,14 +19,14 @@
 <header class="header">
     <div class="header-inner">
         <div class="logo">
-            <a href="#">Card Game</a>
+            <a href="{% url 'games:main' %}">Card Game</a>
         </div>
 
         <nav class="nav">
             {% if user.is_authenticated %}
-                <a href="#" class="btn">게임하기</a>
+                <a href="{% url 'games:startPage' %}" class="btn">게임하기</a>
                 <a href="#" class="btn">게임목록</a>
-                <a href="#" class="btn">랭킹보기</a>
+                <a href="{% url 'games:ranking' %}" class="btn">랭킹보기</a>
                 <a href="#" class="btn">로그아웃</a>
             {% else %}
                 <a href="{% url 'accounts:login' %}" class="btn">로그인</a>
