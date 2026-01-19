@@ -26,10 +26,11 @@
             
             <div class="cards">
                 {% for card in fiveCards %}
-                <label>   
-                    <input type="radio" name="selected_card" value="{{ card }}" required>
-                    {{ card }}
-                </label>
+                    <input type="radio" name="selected_card" id="card_{{ card }}" value="{{ card }}" required>
+                    
+                    <label for="card_{{ card }}" class="card-item">
+                        {{ card }}
+                    </label>
                 {% endfor %}
             </div>
             

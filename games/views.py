@@ -186,4 +186,4 @@ def detail(request, pk):
             return render(request, 'games/gameDetail.html', {'game': game, 'state': 'counter_ready'})
 
     # url로 들어오려는 시도 제거
-    return redirect('games:list')
+    return redirect('games:gameList')
