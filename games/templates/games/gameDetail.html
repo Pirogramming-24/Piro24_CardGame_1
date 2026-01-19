@@ -15,7 +15,7 @@
     {% if state == 'result' %}
         <div class="game_info">
             <h3>
-                {{game.pk}}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 
+                {{display_order}}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 
 
                 {% if game.Winner is None %}
                     무승부 🤝
@@ -31,7 +31,7 @@
                 <p>{{ game.Attacker.nickname }}: {{ game.AttackerCard }}</p>
                 <p>{{ game.Defender.nickname }}: {{ game.DefenderCard }}</p>
                 <br>
-                <p>점수 : {{ request.user.score}}</p>
+                <p>점수 : {{ score_change }}</p>
                 <p>결과 : 
                     {% if game.Winner is None %}
                         무승부 🤝
@@ -47,7 +47,7 @@
 
     {% elif state == 'waiting' %}
         <div class="game_info">
-            <h3>{{ game.pk }}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 게임 진행중</h3>
+            <h3>{{display_order}}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 게임 진행중</h3>
             <hr>
             
             <div class="waiting-content">
@@ -66,7 +66,7 @@
 
     {% elif state == 'counter_ready' %}
         <div class="game_info">
-            <h3>{{ game.pk }}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
+            <h3>{{display_order}}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
             <hr>
             
             <div style="height: 60px;"></div> 
