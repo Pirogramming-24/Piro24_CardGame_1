@@ -1,0 +1,24 @@
+# 가상 환경 및 라이브러리
+venv/
+.venv/
+env/
+
+# 파이썬 캐시 파일
+**/__pycache__/
+*.py[cod]
+
+# 로컬 데이터베이스 및 로그
+db.sqlite3
+*.log
+
+# 환경 변수 및 설정 (민감 정보 보호)
+.env
+.python-version
+
+# 운영체제 관련 임시 파일
+.DS_Store
+Thumbs.db
+
+# 도커 및 버전 관리 관련
+.git
+.gitignore

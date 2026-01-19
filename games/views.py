@@ -17,6 +17,8 @@ def select_five_cards():
     return selected_numbers
 
 def generateGame(request):
+    # if not request.user.is_authenticated:
+    #     return redirect()
     pk = request.user.pk
     if 'five_cards' not in request.session:
         print('new')
@@ -62,6 +64,8 @@ def generateGame(request):
 
 
 def gameList(request):
+    # if not request.user.is_authenticated:
+    #     return redirect()
     pk = request.user.pk
     Games = Game.objects.all()
     context = {
