@@ -1,0 +1,38 @@
+
+{% block content %}
+<div class="game-container">
+    <h1>게임 정보</h1>
+
+    {% if state == 'result' %}
+        <div class="result-box">
+            <h3>
+                {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 
+                {% if game.Winner == request.user %} 승리👑 {% else %} 패배😭 {% endif %}
+            </h3>
+            <p>숫자가 {% if game.isBiggerScoreWin %}"큰"{% else %}"작은"{% endif %} 사람이 승리</p>
+            <p>{{ game.Attacker.nickname }}: {{ game.AttackerCard }}</p>
+            <p>{{ game.Defender.nickname }}: {{ game.DefenderCard }}</p>
+            <button onclick="location.href='{% url 'games:gameList' %}'">전체 목록</button>
+        </div>
+
+    {% elif state == 'waiting' %}
+        <div class="waiting-box">
+            <h3>{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 게임 진행중</h3>
+            <p>내 카드: {{ game.AttackerCard }}</p>
+            <button>게임 취소</button>
+            <button onclick="location.href='{% url 'games:gameList' %}'">전체 목록</button>
+        </div>
+
+    {% elif state == 'counter_ready' %}
+        <div class="counter-ready-box">
+            <h3>{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
+            <button onclick="location.href='{% url 'games:counter_attack' game.pk %}'" class="btn-brown">
+                대응하기
+            </button>
+            <button onclick="location.href='{% url 'games:gameList' %}'">전체 목록</button>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -23,6 +23,7 @@ def home(request):
         return HttpResponse(f"<h1>{request.user.username}님, 로그인 성공!</h1><p>이제 카드 게임을 시작해볼까요?</p>")
     else:
         return HttpResponse("로그인이 필요합니다.")
+from .views import ranking
 
 urlpatterns = [
     path('admin/', admin.site.urls),

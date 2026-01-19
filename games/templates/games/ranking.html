@@ -1,0 +1,72 @@
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>랭킹</title>
+
+  <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ranking.css' %}">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">Card Game</div>
+    <div class="nav">
+      <a href="/" class="btn">게임하기</a>
+      <a href="/" class="btn">게임목록</a>
+      <a href="/" class="btn">랭킹보기</a>
+      <a href="/" class="btn">로그아웃</a>
+    </div>
+  </div>
+</header>
+
+<main class="ranking-page">
+  <div class="container">
+
+    <h1 class="page-title">TOP 3</h1>
+
+    <div class="top3">
+      {% for player in users %}
+      <div class="top-card rank-{{ forloop.counter }}">
+        <div class="rank-icon">
+          {% if forloop.counter == 1 %}🥇
+          {% elif forloop.counter == 2 %}🥈
+          {% else %}🥉{% endif %}
+        </div>
+        <div class="nickname">{{ player.nickname }}</div>
+        <div class="score">{{ player.score }}점</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="full-ranking">
+      <h2 class="section-title">전체 랭킹</h2>
+
+      <div class="ranking-list">
+        {% for player in users %}
+        <div class="ranking-row {% if player.rank <= 3 %}top-bg{% endif %}">
+          <div class="ranking-left">
+            <span class="rank-num">#{{forloop.counter}} {{ player.rank }}</span>
+            <div>
+              <div class="nickname">{{ player.nickname }}</div>
+              {% if player.rank <= 3 %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="ranking-score">{{ player.score}}점</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

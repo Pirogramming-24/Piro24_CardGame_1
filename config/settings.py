@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'games',
+<<<<<<< HEAD
 
     'django.contrib.sites',
     'allauth',
@@ -46,6 +47,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'allauth.socialaccount.providers.google',
+=======
+    'django.contrib.humanize',
+>>>>>>> develop
 ]
 
 SITE_ID=1
@@ -66,7 +70,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,9 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -162,3 +166,7 @@ ACCOUNT_ALLOW_REGISTRATION = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+AUTH_USER_MODEL = 'accounts.User'
