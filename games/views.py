@@ -69,6 +69,8 @@ def gameList(request):
         return redirect('accounts:login')
     pk = request.user.pk
     Games = Game.objects.filter(Q(Attacker=request.user)|Q(Defender=request.user)).order_by('id')
+    for idx, game in enumerate(Games, start=1):
+        game.display_order = idx
     context = {
         'Games':Games,
         'user_id':pk,
@@ -175,7 +177,12 @@ def counter_attack(request, pk) :
 def detail(request, pk):
     game = get_object_or_404(Game, pk=pk)
 
-    # 공격자이면서 진행 중일 때 게임 취소 기능
+    display_order = request.GET.get("order", game.pk)
+    common_context = {
+        'game': game,
+        'display_order': display_order, 
+    }
+
     if request.method == "POST":
         if request.user == game.Attacker and game.isGameOngoing:
             game.delete()
@@ -183,15 +190,32 @@ def detail(request, pk):
         
     # case1. 종료된 게임
     if not game.isGameOngoing :
-        # 게임 결과 정보 띄우기
-        return render(request, 'games/gameDetail.html', {'game': game, 'state': 'result'})
+        score_change = 0
+        if game.Winner:
+            if request.user == game.Attacker:
+                my_card_value = game.AttackerCard
+            else:
+                my_card_value = game.DefenderCard
+            
+            if game.Winner == request.user:
+                score_change = my_card_value
+            else:
+                score_change = -my_card_value
+        
+        common_context['score_change'] = score_change 
+        common_context['state'] = 'result'
+        
+        return render(request, 'games/gameDetail.html', common_context)
+
     # 상황 2: 게임 진행 중 (Ongoing)
     else:
         if request.user == game.Attacker:
-            return render(request, 'games/gameDetail.html', {'game': game, 'state': 'waiting'})
+            common_context['state'] = 'waiting'
+            return render(request, 'games/gameDetail.html', common_context)
         
         elif request.user == game.Defender:
-            return render(request, 'games/gameDetail.html', {'game': game, 'state': 'counter_ready'})
+            common_context['state'] = 'counter_ready'
+            return render(request, 'games/gameDetail.html', common_context)
 
     # url로 들어오려는 시도 제거
     return redirect('games:gameList')

@@ -3,7 +3,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    justify-content: flex-start;
+    background-color: #F7F4EF;
     min-height: 100vh;
+    padding-top: 100px;
 }
 .main_container h1 {
     color: #8B6F47;
