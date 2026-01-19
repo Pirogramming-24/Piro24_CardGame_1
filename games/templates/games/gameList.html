@@ -16,7 +16,7 @@
             <div class="game_card">
                 <div class="game_info">
                     <span class="game_number">{{ forloop.counter }}.</span>
-                    <span class="game_players">{{ game.Attacker }} vs {{ game.Defender }}</span>
+                    <span class="game_players">{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }}</span>
                     
                     {% if game.isGameOngoing %}
                         {% if game.Attacker.id == user_id %}
