@@ -16,7 +16,7 @@
 
     <div class="game_info">
 
-        <h3>{{game.pk}}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
+        <h3>{{ display_order }}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
         <hr>
         <form method="POST" class="game_box">
             {% csrf_token %}

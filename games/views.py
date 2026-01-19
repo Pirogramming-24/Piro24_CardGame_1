@@ -167,9 +167,12 @@ def counter_attack(request, pk) :
                     del request.session['five_cards']
         return redirect('games:detail', pk=pk)
     else :
+        display_order = request.GET.get("order", game.pk)
+
         context = {
             'game': game,
-            'fiveCards': fiveCards
+            'fiveCards': fiveCards,
+            'display_order': display_order, 
         }
         return render(request, 'games/gameCounter.html', context)
     
