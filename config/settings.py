@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'games',
-<<<<<<< HEAD
 
     'django.contrib.sites',
     'allauth',
@@ -47,9 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'allauth.socialaccount.providers.google',
-=======
     'django.contrib.humanize',
->>>>>>> develop
 ]
 
 SITE_ID=1
