@@ -68,7 +68,7 @@ def gameList(request):
     if not request.user.is_authenticated:
         return redirect('accounts:login')
     pk = request.user.pk
-    Games = Game.objects.filter(Q(Attacker=request.user)|Q(Defender=request.user))
+    Games = Game.objects.filter(Q(Attacker=request.user)|Q(Defender=request.user)).order_by('id')
     context = {
         'Games':Games,
         'user_id':pk,
