@@ -1,42 +1,54 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
-</head>
-<body>
-    <h3>게임 목록</h3>
-    <h5>현재 플레이어:{{user_name}}</h5>
-    <a href="{%url 'games:startPage'%}">Minsu</a>
-    <a href="{%url 'games:startPage'%}">chanwoong</a>
-    {%for game in Games%}
-        {%if game.Attacker.id == user_id or game.Defender.id == user_id%}
-        <div class="game_box">
-            <p>==================</p>
-                <span>{{forloop.counter}}. </span>
-                <span>{{game.Attacker}} vs {{game.Defender}}</span>
-                {%if game.isGameOngoing%}
-                    {%if game.Attacker.id == user_id%}
-                        <span>/게임 진행 중</span>
-                        <form method="POST">
-                            {%csrf_token%}
-                            <button type="submit" name="btn" value={{game.id}}>게임 취소</button>
-                        </form>
-                    {%else%}
-                        <span>/반격하기</span>
-                        <a href='#'>반격하기</a>
-                    {%endif%}
-                {%else%}
-                    {%if game.Winner.id == user_id%}
-                        <span>👑승리👑</span>
-                    {%else%}
-                        <span>😵패배😵</span>
-                    {%endif%}
-                {%endif%}
-            <p>==================</p>
-        </div>
-        {%endif%}
-    {%endfor%}
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{%block header%}
+<link rel="stylesheet" href="{% static 'css/gameList.css' %}">
+{%endblock%}
+
+{% block content %}
+<div id="game_list_container">
+    <h2 class="list_title">게임 목록</h2>
+    <h5 class="current_player">현재 플레이어: {{ user_name }}</h5>
+
+    <div class="game_list_wrapper">
+        {% for game in Games %}
+            {% if game.Attacker.id == user_id or game.Defender.id == user_id %}
+            <div class="game_card">
+                <div class="game_info">
+                    <span class="game_number">{{ forloop.counter }}.</span>
+                    <span class="game_players">{{ game.Attacker }} vs {{ game.Defender }}</span>
+                    
+                    {% if game.isGameOngoing %}
+                        {% if game.Attacker.id == user_id %}
+                            <span class="status_text">/ 게임 진행 중</span>
+                        {% else %}
+                            <span class="status_text">/ 반격하기</span>
+                        {% endif %}
+                    {% else %}
+                        {% if game.Winner.id == user_id %}
+                            <span class="status_text result_win">/ 👑승리👑</span>
+                        {% else %}
+                            <span class="status_text result_lose">/ 😵패배😵</span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <div class="game_buttons">
+                    {% if game.isGameOngoing %}
+                        {% if game.Attacker.id == user_id %}
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" name="btn" value="{{ game.id }}" class="btn_cancel">게임 취소</button>
+                            </form>
+                        {% else %}
+                            <a href="#" class="btn_attack">반격하기</a>
+                        {% endif %}
+                    {% endif %}
+                    <a href="{%url 'games:detail' game.id %}" class="btn_detail">게임 정보</a>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

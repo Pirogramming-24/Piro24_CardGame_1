@@ -17,6 +17,8 @@ def select_five_cards():
     return selected_numbers
 
 def generateGame(request):
+    # if not request.user.is_authenticated:
+    #     return redirect()
     pk = request.user.pk
     if 'five_cards' not in request.session:
         print('new')
@@ -62,6 +64,8 @@ def generateGame(request):
 
 
 def gameList(request):
+    # if not request.user.is_authenticated:
+    #     return redirect()
     pk = request.user.pk
     Games = Game.objects.all()
     context = {
@@ -186,4 +190,4 @@ def detail(request, pk):
             return render(request, 'games/gameDetail.html', {'game': game, 'state': 'counter_ready'})
 
     # url로 들어오려는 시도 제거
-    return redirect('games:list')
+    return redirect('games:gameList')
