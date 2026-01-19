@@ -44,7 +44,7 @@
                             <a href="#" class="btn_attack">반격하기</a>
                         {% endif %}
                     {% endif %}
-                    <a href="#" class="btn_detail">게임 정보</a>
+                    <a href="{%url 'games:detail' game.id %}" class="btn_detail">게임 정보</a>
                 </div>
             </div>
             {% endif %}
