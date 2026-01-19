@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db import transaction
 from django.http import HttpResponse
+from django.db.models import Q
 # Create your views here.
 def main(request):
     return render(request, "games/main.html")
@@ -17,6 +18,8 @@ def select_five_cards():
     return selected_numbers
 
 def generateGame(request):
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
     pk = request.user.pk
     if 'five_cards' not in request.session:
         print('new')
@@ -62,8 +65,10 @@ def generateGame(request):
 
 
 def gameList(request):
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
     pk = request.user.pk
-    Games = Game.objects.all()
+    Games = Game.objects.filter(Q(Attacker=request.user)|Q(Defender=request.user))
     context = {
         'Games':Games,
         'user_id':pk,
@@ -78,9 +83,11 @@ def gameList(request):
     return render(request,'games/gameList.html',context)
 
 def ranking(request):
+    top_users = User.objects.exclude(is_superuser=True).order_by('-score')[:3]
     users = User.objects.exclude(is_superuser=True).order_by('-score')
     context = {
-        'users':users
+        'users':users,
+        'top_users':top_users
     }
     return render(request,'games/ranking.html',context)
 
@@ -93,6 +100,11 @@ def counter_attack(request, pk) :
     # 예외 : 방어자가 아니거나 이미 종료된 게임이면 list페이지로 redirect
     if request.user != game.Defender or game.isGameOngoing == False:
         return redirect('games:detail', pk=pk)
+    
+    # 랜덤 숫자 5개 얻기
+    if 'five_cards' not in request.session:
+        request.session['five_cards'] = select_five_cards() 
+    fiveCards = request.session['five_cards']
     
     # 2. 게임 결과 판정 로직
     if request.method == 'POST':
@@ -108,7 +120,7 @@ def counter_attack(request, pk) :
 
             # case 1 - 무승부인 경우
             if attacker_card == defender_card :
-                game.winner = None
+                game.Winner = None
             
             # case 2 - 숫자가 서로 다른 경우
             else :
@@ -148,16 +160,26 @@ def counter_attack(request, pk) :
             game.isGameOngoing = False
             game.save()
 
+            if 'five_cards' in request.session:
+                    del request.session['five_cards']
         return redirect('games:detail', pk=pk)
     else :
-        context = {'game': game}
+        context = {
+            'game': game,
+            'fiveCards': fiveCards
+        }
         return render(request, 'games/gameCounter.html', context)
-    # POST 요청이 아니면 상세 페이지로 리다이렉트
-    return redirect('games:detail', pk=pk)
+    
 
 def detail(request, pk):
     game = get_object_or_404(Game, pk=pk)
 
+    # 공격자이면서 진행 중일 때 게임 취소 기능
+    if request.method == "POST":
+        if request.user == game.Attacker and game.isGameOngoing:
+            game.delete()
+            return redirect('games:gameList')
+        
     # case1. 종료된 게임
     if not game.isGameOngoing :
         # 게임 결과 정보 띄우기
@@ -171,4 +193,4 @@ def detail(request, pk):
             return render(request, 'games/gameDetail.html', {'game': game, 'state': 'counter_ready'})
 
     # url로 들어오려는 시도 제거
-    return redirect('games:list')
+    return redirect('games:gameList')

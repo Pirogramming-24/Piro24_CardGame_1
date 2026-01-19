@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/game-start.css' %}">
     <link rel="stylesheet" href="{% static 'css/ranking.css' %}">
+    {%block header%}{%endblock%}
     
 </head>
 <body>
@@ -18,15 +20,15 @@
 <header class="header">
     <div class="header-inner">
         <div class="logo">
-            <a href="#">Card Game</a>
+            <a href="{% url 'games:main' %}">Card Game</a>
         </div>
 
         <nav class="nav">
             {% if user.is_authenticated %}
-                <a href="#" class="btn">게임하기</a>
-                <a href="#" class="btn">게임목록</a>
-                <a href="#" class="btn">랭킹보기</a>
-                <a href="#" class="btn">로그아웃</a>
+                <a href="{% url 'games:startPage' %}" class="btn">게임하기</a>
+                <a href="{% url 'games:gameList' %}" class="btn">게임목록</a>
+                <a href="{% url 'games:ranking' %}" class="btn">랭킹보기</a>
+                <a href="{% url 'accounts:logout' %}" class="btn">로그아웃</a>
             {% else %}
                 <a href="{% url 'accounts:login' %}" class="btn">로그인</a>
                 <a href="{% url 'accounts:signup' %}" class="btn">회원가입</a>

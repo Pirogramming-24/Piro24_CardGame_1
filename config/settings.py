@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fcxx-okxyxu*hb=*9&fh@#j!n9+6s7-s7u#wqbtge%-v0%w!1=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -167,3 +167,4 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 AUTH_USER_MODEL = 'accounts.User'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
