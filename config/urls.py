@@ -18,17 +18,10 @@ from django.contrib import admin
 from django.urls import path,include
 from django.http import HttpResponse
 
-def home(request):
-    if request.user.is_authenticated:
-        return HttpResponse(f"<h1>{request.user.username}님, 로그인 성공!</h1><p>이제 카드 게임을 시작해볼까요?</p>")
-    else:
-        return HttpResponse("로그인이 필요합니다.")
-# from .views import ranking
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('games/',include('games.urls')),
     path('accounts/', include('allauth.urls')),
     path('accounts/',include('accounts.urls')),
-    path('',home),
+    path("", include('games.urls')),
 ]
