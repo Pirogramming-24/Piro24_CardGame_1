@@ -1,3 +1,13 @@
+.ranking {
+  min-height: calc(100vh - 70px);
+  background: #f7f4ef;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 20px;
+}
+
+
+
 body {
   background: #F5F1ED;
   color: #3E3E3E;
