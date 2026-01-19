@@ -1,32 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
 {% load static %}
-{% load humanize %}
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>랭킹</title>
-
-  <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-  <link rel="stylesheet" href="{% static 'css/header.css' %}">
-  <link rel="stylesheet" href="{% static 'css/ranking.css' %}">
-</head>
-
-<body>
-
-<header class="header">
-  <div class="header-inner">
-    <div class="logo">
-            <a href="{% url 'games:main' %}">Card Game</a>
-        </div>
-    <div class="nav">
-      <a href="{% url 'games:startPage' %}" class="btn">게임하기</a>
-      <a href="{% url 'games:gameList' %}" class="btn">게임목록</a>
-      <a href="{% url 'games:ranking' %}" class="btn">랭킹보기</a>
-      <a href="{% url 'accounts:login' %}" class="btn">로그아웃</a>
-    </div>
-  </div>
-</header>
 
 <div class="ranking">
   <main class="ranking-page">
@@ -65,3 +39,5 @@
     </div>
   </main>
 </div>
+
+{% endblock %}
