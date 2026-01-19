@@ -5,9 +5,9 @@ app_name = 'games'
 
 urlpatterns = [
     path("", views.main, name="main"),
-    path('startPage/<int:pk>/',views.generateGame, name='startPage'),
+    path('startPage/',views.generateGame, name='startPage'),
     path('gameList/',views.gameList,name='gameList'),
     path('<int:pk>/counter/', views.counter_attack, name='counter_attack'),
     path('<int:pk>/', views.detail, name='detail'),
-    path('ranking',views.ranking,name='ranking'),
+    path('ranking/',views.ranking,name='ranking'),
 ]
