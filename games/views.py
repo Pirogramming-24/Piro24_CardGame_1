@@ -97,85 +97,76 @@ def ranking(request):
 
 
 # 1. 반격하기 기능
-def counter_attack(request, pk) :
+def counter_attack(request, pk):
     game = get_object_or_404(Game, pk=pk)
 
-    # 예외 : 방어자가 아니거나 이미 종료된 게임이면 list페이지로 redirect
     if request.user != game.Defender or game.isGameOngoing == False:
         return redirect('games:detail', pk=pk)
     
-    # 랜덤 숫자 5개 얻기
+    display_order = request.GET.get("order", game.pk)
+
     if 'five_cards' not in request.session:
         request.session['five_cards'] = select_five_cards() 
     fiveCards = request.session['five_cards']
     
-    # 2. 게임 결과 판정 로직
     if request.method == 'POST':
-        # DB연산 중 꼬인경우 롤백
         with transaction.atomic():
-            # 선택한 숫자 저장
             selected_card = int(request.POST.get('selected_card'))
             game.DefenderCard = selected_card
             
-            # 게임 결과 결정
             attacker_card = game.AttackerCard
             defender_card = game.DefenderCard
 
-            # case 1 - 무승부인 경우
-            if attacker_card == defender_card :
+            if attacker_card == defender_card:
                 game.Winner = None
             
-            # case 2 - 숫자가 서로 다른 경우
-            else :
-                if game.isBiggerScoreWin: # 큰 숫자가 이기는 룰인 경우
+            else:
+                if game.isBiggerScoreWin:
                     if attacker_card > defender_card:
                         game.Winner = game.Attacker
                     else:
                         game.Winner = game.Defender
-                else: # 작은 숫자가 이기는 룰인 경우
+                else:
                     if attacker_card > defender_card:
                         game.Winner = game.Defender
                     else:
                         game.Winner = game.Attacker
             
-            # 3. 점수 계산 및 저장 로직
-            if game.Winner : # 무승부인 경우는 제외
+            if game.Winner:
                 if game.Winner == game.Attacker:
-                    winner_obj = game.Attacker # 승자 지정
-                    loser_obj = game.Defender # 패자 지정
-                    winner_score = attacker_card # 승자의 카드 숫자
-                    loser_score = defender_card  # 패자의 카드 숫자
+                    winner_obj = game.Attacker
+                    loser_obj = game.Defender
+                    winner_score = attacker_card
+                    loser_score = defender_card
                 else:
                     winner_obj = game.Defender
                     loser_obj = game.Attacker
                     winner_score = defender_card
                     loser_score = attacker_card
                 
-                # 승자, 패자 점수 반영
                 winner_obj.score += winner_score
                 loser_obj.score -= loser_score
 
-                # 승자, 패자 정보 저장
                 winner_obj.save()
                 loser_obj.save()
 
-            # 게임 진행 상태를 종료로 변경 및 저장
             game.isGameOngoing = False
             game.save()
 
             if 'five_cards' in request.session:
                     del request.session['five_cards']
-        return redirect('games:detail', pk=pk)
-    else :
-        display_order = request.GET.get("order", game.pk)
+        
+        response = redirect('games:detail', pk=pk)
+        response['Location'] += f'?order={display_order}'
+        return response
 
+    else:
         context = {
             'game': game,
             'fiveCards': fiveCards,
-            'display_order': display_order, 
+            'display_order': display_order,
         }
         return render(request, 'games/gameCounter.html', context)
-    
 
 def detail(request, pk):
     game = get_object_or_404(Game, pk=pk)
