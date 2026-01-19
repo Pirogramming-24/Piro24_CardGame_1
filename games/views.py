@@ -18,8 +18,8 @@ def select_five_cards():
     return selected_numbers
 
 def generateGame(request):
-    # if not request.user.is_authenticated:
-    #     return redirect()
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
     pk = request.user.pk
     if 'five_cards' not in request.session:
         print('new')
@@ -65,8 +65,8 @@ def generateGame(request):
 
 
 def gameList(request):
-    # if not request.user.is_authenticated:
-    #     return redirect()
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
     pk = request.user.pk
     Games = Game.objects.filter(Q(Attacker=request.user)|Q(Defender=request.user))
     context = {
