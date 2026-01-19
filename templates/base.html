@@ -28,7 +28,7 @@
                 <a href="{% url 'games:startPage' %}" class="btn">게임하기</a>
                 <a href="{% url 'games:gameList' %}" class="btn">게임목록</a>
                 <a href="{% url 'games:ranking' %}" class="btn">랭킹보기</a>
-                <a href="{% url 'accounts:login' %}" class="btn">로그아웃</a>
+                <a href="{% url 'accounts:logout' %}" class="btn">로그아웃</a>
             {% else %}
                 <a href="{% url 'accounts:login' %}" class="btn">로그인</a>
                 <a href="{% url 'accounts:signup' %}" class="btn">회원가입</a>
