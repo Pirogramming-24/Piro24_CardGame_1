@@ -94,6 +94,11 @@ def counter_attack(request, pk) :
     if request.user != game.Defender or game.isGameOngoing == False:
         return redirect('games:detail', pk=pk)
     
+    # 랜덤 숫자 5개 얻기
+    if 'five_cards' not in request.session:
+        request.session['five_cards'] = select_five_cards() 
+    fiveCards = request.session['five_cards']
+    
     # 2. 게임 결과 판정 로직
     if request.method == 'POST':
         # DB연산 중 꼬인경우 롤백
@@ -108,7 +113,7 @@ def counter_attack(request, pk) :
 
             # case 1 - 무승부인 경우
             if attacker_card == defender_card :
-                game.winner = None
+                game.Winner = None
             
             # case 2 - 숫자가 서로 다른 경우
             else :
@@ -148,12 +153,16 @@ def counter_attack(request, pk) :
             game.isGameOngoing = False
             game.save()
 
+            if 'five_cards' in request.session:
+                    del request.session['five_cards']
         return redirect('games:detail', pk=pk)
     else :
-        context = {'game': game}
+        context = {
+            'game': game,
+            'fiveCards': fiveCards
+        }
         return render(request, 'games/gameCounter.html', context)
-    # POST 요청이 아니면 상세 페이지로 리다이렉트
-    return redirect('games:detail', pk=pk)
+    
 
 def detail(request, pk):
     game = get_object_or_404(Game, pk=pk)

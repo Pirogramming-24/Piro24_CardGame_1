@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 
 {% block content %}
 <div class="game-container">
@@ -7,7 +8,14 @@
         <div class="result-box">
             <h3>
                 {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 
-                {% if game.Winner == request.user %} 승리👑 {% else %} 패배😭 {% endif %}
+
+                {% if game.Winner is None %}
+                    무승부 🤝
+                 {% elif game.Winner == request.user %} 
+                    승리👑 
+                {% else %} 
+                    패배😭 
+                {% endif %}
             </h3>
             <p>숫자가 {% if game.isBiggerScoreWin %}"큰"{% else %}"작은"{% endif %} 사람이 승리</p>
             <p>{{ game.Attacker.nickname }}: {{ game.AttackerCard }}</p>

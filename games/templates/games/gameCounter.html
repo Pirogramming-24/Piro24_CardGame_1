@@ -9,14 +9,14 @@
         
         <p>반격 카드를 선택하세요:</p>
         
-        {% with "1 2 3 4 5 6 7 8 9 10" as numbers %}
-            {% for num in numbers.split %}
-                <label>
-                    <input type="radio" name="selected_card" value="{{ num }}" required>
-                    {{ num }}
-                </label>
-            {% endfor %}
-        {% endwith %}
+
+        {% for card in fiveCards %}
+            <label>   
+            <input type="radio" name="selected_card" value="{{ card }}" required>
+                {{ card }}
+            </label>
+        {% endfor %}
+      
 
         <br><br>
 
