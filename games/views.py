@@ -72,7 +72,8 @@ def gameList(request):
     context = {
         'Games':Games,
         'user_id':pk,
-        'user_name':request.user.nickname
+        'user_name':request.user.nickname,
+        'user_score' : request.user.score
     }
     if request.method == "POST":
         game_id = request.POST.get('btn')
