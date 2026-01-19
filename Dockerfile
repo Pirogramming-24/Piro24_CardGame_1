@@ -33,6 +33,7 @@ COPY --from=builder /usr/src/app /usr/src/app
 # 컨테이너 실행 명령 (JSON 형식을 더 권장하지만 일단 작동하도록 유지)
 CMD sh -c "python manage.py makemigrations --noinput && \
     python manage.py migrate --noinput && \
+    python manage.py setup_social_apps && \
     python manage.py runserver 0.0.0.0:8000"
 
 EXPOSE 8000
