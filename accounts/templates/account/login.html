@@ -25,7 +25,10 @@
     </div>
 
     <div class="social-login">
-        <button class="btn naver">Naver로 로그인</button>
+        <a href="{% provider_login_url 'naver' %}" style="text-decoration:none;">
+            <button class="btn naver">Naver로 로그인</button>
+        </a>
+
         <a href="{% provider_login_url 'google' %}" style="text-decoration:none;">
             <button class="btn google">Google로 로그인</button>
         </a>
