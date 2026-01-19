@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="modal-overlay">
+  <div class="modal-card">
+    <div class="icon-wrapper">
+      👋
+    </div>
+    <h2 class="modal-title">로그아웃 하시겠어요?</h2>
+    <p class="modal-description">
+      오늘 하루도 고생 많으셨어요!<br>
+      안전하게 로그아웃 후 다시 만나요.
+    </p>
+    <div class="button-group">
+        <a href="{% url 'games:main' %}" class="modal-link">
+            <button type="button" class="btn-cancel">취소</button>
+        </a>
+        
+        <form method="post" action="{% url 'account_logout' %}" class="modal-link">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button type="submit" class="btn-logout">로그아웃</button>
+        </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 기본 폰트 및 배경 설정 (전체 테마에 맞춰 적용) */
+  :root {
+    --bg-color: #f7f3ed;      /* 전체 배경 베이지 */
+    --primary-brown: #8d735b; /* 상단 버튼 브라운 */
+    --text-main: #4a3f35;     /* 메인 텍스트 컬러 */
+    --text-sub: #8a817a;      /* 서브 텍스트 컬러 */
+  }
+
+  /* 모달 오버레이 (배경 흐리게) */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* 은은한 어둠 */
+    backdrop-filter: blur(4px);    /* 배경 살짝 블러 처리 */
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  /* 모달 카드 */
+  .modal-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 24px;
+    width: 340px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  /* 이모지 아이콘 배경 */
+  .icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 28px;
+  }
+
+  .modal-title {
+    color: var(--text-main);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .modal-description {
+    color: var(--text-sub);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+
+  /* 버튼 레이아웃 */
+.button-group {
+    display: flex;
+    gap: 12px;        /* 버튼 사이의 간격만 설정 */
+    width: 100%;      /* 부모 너비 꽉 채우기 */
+    margin-top: 20px; 
+}
+
+/* 버튼을 감싸는 요소(a 태그, form 태그)가 똑같이 절반씩 나눠 갖도록 설정 */
+.modal-link {
+    flex: 1;          /* 이 설정이 핵심입니다! */
+    display: flex;
+}
+
+/* 버튼 자체 설정 */
+button {
+    width: 100%;      /* 감싸는 요소 안에서 꽉 차게 */
+    padding: 14px 0;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+  /* 취소 버튼: 배경과 어울리는 연한 그레이/베이지 */
+  .btn-cancel {
+    background-color: #f1f1f1;
+    color: #777;
+  }
+  .btn-cancel:hover {
+    background-color: #e8e8e8;
+  }
+
+  /* 로그아웃 버튼: 상단 메뉴와 동일한 브라운 톤 */
+  .btn-logout {
+    background-color: var(--primary-brown);
+    color: white;
+  }
+  .btn-logout:hover {
+    background-color: #765f4a; /* 살짝 더 진하게 */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(141, 115, 91, 0.3);
+  }
+</style>
+{% endblock %}
