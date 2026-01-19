@@ -91,13 +91,13 @@
   font-weight: bold;
 }
 
-.btn.kakao {
-  background: #FEE500;
-  color: #3c1e1e;
-}
-
 .btn.naver {
   background: #03C75A;
+  color: white;
+}
+
+.btn.google {
+  background: #4285F4;
   color: white;
 }
 
