@@ -1,0 +1,120 @@
+/* 전체 페이지 */
+.game-start {
+  min-height: calc(100vh - 70px);
+  background: #f7f4ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+/* 상단 텍스트 */
+.game-start-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.game-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #8B6F47;
+  margin-bottom: 8px;
+}
+
+.game-desc {
+  font-size: 15px;
+  color: #6F5636;
+}
+
+/* 카드 박스 */
+.card-box {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+/* 공통 폼 그룹 */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #6F5636;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* 카드 선택 영역 */
+.card-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-radio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card-radio input {
+  display: none;
+}
+
+.card-radio span {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #d8cfc7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #8B6F47;
+  transition: all 0.2s ease;
+}
+
+/* 선택 상태 */
+.card-radio input:checked + span {
+  background: #8B6F47;
+  color: white;
+  border-color: #8B6F47;
+}
+
+/* 셀렉트 */
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d8cfc7;
+  font-size: 14px;
+}
+
+/* 버튼 */
+.btn.primary {
+  width: 100%;
+  margin-top: 10px;
+  background: #8B6F47;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.btn.primary:hover {
+  background: #745b39;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #d8cfc7;
+  margin: 24px 0;
+}
