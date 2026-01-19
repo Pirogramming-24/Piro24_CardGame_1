@@ -8,7 +8,14 @@
 {% block content %}
 <div id="game_list_container">
     <h2 class="list_title">게임 목록</h2>
-    <h5 class="current_player">현재 플레이어: {{ user_name }}</h5>
+    <div class="My_status">
+        <h5 class="current_player"><span id="Seungu">👤</span> 현재 플레이어: {{ user_name }}</h5>
+        <div class="score_container">
+            <span class="score_label">내 점수: </span>
+            <span class="score_value">{{ user_score }}</span>
+            <span class="score_unit">pts</span>
+        </div>
+    </div>
 
     <div class="game_list_wrapper">
         {% for game in Games %}
