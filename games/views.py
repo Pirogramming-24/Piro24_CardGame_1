@@ -167,6 +167,12 @@ def counter_attack(request, pk) :
 def detail(request, pk):
     game = get_object_or_404(Game, pk=pk)
 
+    # 공격자이면서 진행 중일 때 게임 취소 기능
+    if request.method == "POST":
+        if request.user == game.Attacker and game.isGameOngoing:
+            game.delete()
+            return redirect('games:gameList')
+        
     # case1. 종료된 게임
     if not game.isGameOngoing :
         # 게임 결과 정보 띄우기

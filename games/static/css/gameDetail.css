@@ -1,0 +1,120 @@
+.main_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.main_container h1 {
+    color: #8B6F47;
+    background-color: #F7F4EF;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.main_container h3 {
+    color: #8B6F47;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+.main_container .game_info {
+    background: white;
+    width: 100%;
+    max-width: 380px;
+    padding: 28px 24px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    
+}
+.main_container .game_info h3 {
+    color: #8B6F47;
+    font-weight: 800;
+    font-size: 14px;
+
+}
+.main_container .game_info hr {
+    background-color: #8B6F47;
+    height: 2px;
+    border: none;
+}
+.main_container .game_info .game_box {
+    padding: 20px 20px;
+    font-weight: 800;
+}
+
+.main_container .game_info .game_box p {
+    color: #8B6F47;
+    text-align: center;
+}
+.main_container .game_info .game_box .gameList {
+    border: 1px solid #8B6F47;
+    border-radius: 8px;
+    color: #8B6F47;
+    background-color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    width: 50%;
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+}
+.main_container .game_info .waiting-content .my-card {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #8B6F47;
+    margin: 40px 0; 
+}
+
+.main_container .game_info .button_group {
+    display: flex;
+    justify-content: space-between; 
+    gap: 10px; 
+    width: 100%;
+}
+
+.main_container .game_info .button_group .form-btn {
+    flex: 1; 
+    width: 100%;
+}
+
+.main_container .game_info .button_group .btn-cancel {
+    width: 100%;
+    background-color: #D3D3D3; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.main_container .game_info .button_group .btn-list {
+    flex: 1; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #8B6F47;
+    color: #8B6F47; 
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    box-sizing: border-box; 
+}
+.main_container .game_info .button_group .btn-respond {
+    flex: 1;
+    background-color: #8B6F47; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0;
+}

@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
+{% block header%} 
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/gameDetail.css' %}">
+
+{% endblock %}
+
 {% block content %}
-<div class="game-container">
+
+<div class="main_container">
     <h1>게임 정보</h1>
 
     {% if state == 'result' %}
-        <div class="result-box">
+        <div class="game_info">
             <h3>
-                {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 
+                {{game.pk}}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 
 
                 {% if game.Winner is None %}
                     무승부 🤝
@@ -17,27 +25,59 @@
                     패배😭 
                 {% endif %}
             </h3>
-            <p>숫자가 {% if game.isBiggerScoreWin %}"큰"{% else %}"작은"{% endif %} 사람이 승리</p>
-            <p>{{ game.Attacker.nickname }}: {{ game.AttackerCard }}</p>
-            <p>{{ game.Defender.nickname }}: {{ game.DefenderCard }}</p>
-            <button onclick="location.href='{% url 'games:gameList' %}'">전체 목록</button>
+            <hr>
+            <div class="game_box">
+                <p>숫자가 {% if game.isBiggerScoreWin %}큰{% else %}작은{% endif %} 사람이 승리</p>
+                <p>{{ game.Attacker.nickname }}: {{ game.AttackerCard }}</p>
+                <p>{{ game.Defender.nickname }}: {{ game.DefenderCard }}</p>
+                <br>
+                <p>점수 : {{ request.user.score}}</p>
+                <p>결과 : 
+                    {% if game.Winner is None %}
+                        무승부 🤝
+                    {% elif game.Winner == request.user %} 
+                        승리👑 
+                    {% else %} 
+                        패배😭 
+                    {% endif %}
+                </p>
+                <a href="{% url 'games:gameList' %}" class="gameList">전체 목록</a>
+            </div>
         </div>
 
     {% elif state == 'waiting' %}
-        <div class="waiting-box">
-            <h3>{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 게임 진행중</h3>
-            <p>내 카드: {{ game.AttackerCard }}</p>
-            <button>게임 취소</button>
-            <button onclick="location.href='{% url 'games:gameList' %}'">전체 목록</button>
+        <div class="game_info">
+            <h3>{{ game.pk }}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 게임 진행중</h3>
+            <hr>
+            
+            <div class="waiting-content">
+                <p class="my-card">내 카드: {{ game.AttackerCard }}</p>
+                
+                <div class="button_group">
+                    <form method="POST" class="form-btn">
+                        {% csrf_token %}
+                        <button type="submit" name="btn" value="{{game.id}}" class="btn-cancel">게임 취소</button>
+                    </form>
+                    
+                    <a href="{% url 'games:gameList' %}" class="btn-list">전체 목록</a>
+                </div>
+            </div>
         </div>
 
     {% elif state == 'counter_ready' %}
-        <div class="counter-ready-box">
-            <h3>{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
-            <button onclick="location.href='{% url 'games:counter_attack' game.pk %}'" class="btn-brown">
-                대응하기
-            </button>
-            <button onclick="location.href='{% url 'games:gameList' %}'">전체 목록</button>
+        <div class="game_info">
+            <h3>{{ game.pk }}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
+            <hr>
+            
+            <div style="height: 60px;"></div> 
+
+            <div class="button_group">
+                <button onclick="location.href='{% url 'games:counter_attack' game.pk %}'" class="btn-respond">
+                    대응하기
+                </button>
+                
+                <a href="{% url 'games:gameList' %}" class="btn-list">전체 목록</a>
+            </div>
         </div>
     {% endif %}
 
