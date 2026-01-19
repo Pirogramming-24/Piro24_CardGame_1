@@ -53,6 +53,7 @@
 .card-options {
   display: flex;
   justify-content: space-between;
+  margin-top: 12px;
 }
 
 .card-radio {
@@ -67,8 +68,8 @@
 }
 
 .card-radio span {
-  width: 44px;
-  height: 44px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: 2px solid #d8cfc7;
   display: flex;
