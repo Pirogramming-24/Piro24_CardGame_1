@@ -46,7 +46,7 @@
 
 .form-group label {
   font-size: 13px;
-  color: #6F5636;
+  color: #000000;
   margin-bottom: 6px;
 }
 
@@ -80,14 +80,17 @@
   max-width: 380px;
   margin-top: 16px;
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
 .social-login .btn {
+  width: 100%;
   flex: 1;
-  height: 44px;
+  height: 46px;
+  line-height: 46px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
 }
 

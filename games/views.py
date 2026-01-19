@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db import transaction
 from django.http import HttpResponse
+from django.db.models import Q
 # Create your views here.
 def main(request):
     return render(request, "games/main.html")
@@ -67,7 +68,7 @@ def gameList(request):
     # if not request.user.is_authenticated:
     #     return redirect()
     pk = request.user.pk
-    Games = Game.objects.all()
+    Games = Game.objects.filter(Q(Attacker=request.user)|Q(Defender=request.user))
     context = {
         'Games':Games,
         'user_id':pk,
