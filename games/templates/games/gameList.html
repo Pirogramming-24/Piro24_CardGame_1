@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block header%}
+<link rel="stylesheet" href="{% static 'css/gameList.css' %}">
+{%endblock%}
+
+{% block content %}
+<div id="game_list_container">
+    <h2 class="list_title">게임 목록</h2>
+    <div class="My_status">
+        <h5 class="current_player"><span id="Seungu">👤</span> 현재 플레이어: {{ user_name }}</h5>
+        <div class="score_container">
+            <span class="score_label">내 점수: </span>
+            <span class="score_value">{{ user_score }}</span>
+            <span class="score_unit">pts</span>
+        </div>
+    </div>
+
+    <div class="game_list_wrapper">
+        {% for game in Games %}
+            {% if game.Attacker.id == user_id or game.Defender.id == user_id %}
+            <div class="game_card">
+                <div class="game_info">
+                    <span class="game_number">{{ forloop.counter }}.</span>
+                    <span class="game_players">{{ game.Attacker.nickname }} vs {{ game.Defender.nickname }}</span>
+                    
+                    {% if game.isGameOngoing %}
+                        {% if game.Attacker.id == user_id %}
+                            <span class="status_text">/ 게임 진행 중</span>
+                        {% else %}
+                            <span class="status_text">/ 반격하기</span>
+                        {% endif %}
+                    {% else %}
+                        {% if game.Winner.id == user_id %}
+                            <span class="status_text result_win">/ 👑승리👑</span>
+                        {% else %}
+                            {% if game.AttackerCard == game.DefenderCard %}
+                                <span class="status_text result_draw">/ 무승부</span>
+                            {% else %}
+                                <span class="status_text result_lose">/ 😵패배😵</span>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <div class="game_buttons">
+                    {% if game.isGameOngoing %}
+                        {% if game.Attacker.id == user_id %}
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" name="btn" value="{{ game.id }}" class="btn_cancel">게임 취소</button>
+                            </form>
+                        {% else %}
+                            <a href="{%url 'games:counter_attack' game.id %}?order={{ forloop.counter }}" class="btn_attack">반격하기</a>
+                        {% endif %}
+                    {% endif %}
+                    <a href="{%url 'games:detail' game.id %}?order={{ forloop.counter }}" class="btn_detail">게임 정보</a>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

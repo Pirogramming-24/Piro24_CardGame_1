@@ -1,0 +1,74 @@
+/* 메인 섹션 전체 */
+.main {
+  min-height: calc(100vh - 70px); /* header 높이 제외 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f7f4ef;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* 상단 타이틀 영역 */
+.main-header {
+  margin-bottom: 30px;
+}
+
+.main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: #8B6F47;
+  margin-bottom: 10px;
+}
+
+.main-desc {
+  font-size: 18px;
+  color: #6F5636;
+}
+
+/* 본문 영역 */
+.main-content {
+  margin-top: 20px;
+}
+
+/* 로그인 전 문구 */
+.sub {
+  font-size: 15px;
+  color: #8B6F47;
+  margin-top: 10px;
+}
+
+/* 환영 문구 */
+.welcome {
+  background: #8B6F47;
+  color: white;
+  padding: 10px 26px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* 버튼 영역 */
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* 버튼 공통 */
+.actions .btn {
+  background: #8B6F47;
+  color: white;
+  padding: 10px 26px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.actions .btn:hover {
+  background: #745b39;
+}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header%} 
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/gameCounter.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="main_container">
+
+    <h1>반격 하기</h1>
+    <h3>카드를 선택하고 반격하세요</h3>
+
+    <div class="game_info">
+
+        <h3>{{ display_order }}. {{ game.Attacker.nickname }} vs {{ game.Defender.nickname }} / 반격하기</h3>
+        <hr>
+        <form method="POST" class="game_box">
+            {% csrf_token %}
+            
+            <p>반격 카드를 선택하세요:</p>
+            
+            <div class="cards">
+                {% for card in fiveCards %}
+                    <input type="radio" name="selected_card" id="card_{{ card }}" value="{{ card }}" required>
+                    
+                    <label for="card_{{ card }}" class="card-item">
+                        {{ card }}
+                    </label>
+                {% endfor %}
+            </div>
+            
+            <div class="buttons">
+                <button type="submit">반격하기</button>
+                <a href="{% url 'games:gameList' %}" class="gameList">전체 목록</a>
+            </div>
+       </form>
+
+        
+    </div>
+    
+</div>
+    
+{% endblock %}

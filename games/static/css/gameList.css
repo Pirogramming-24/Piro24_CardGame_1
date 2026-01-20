@@ -1,0 +1,168 @@
+/* 1. 전체 컨테이너 및 배경 설정 */
+body {
+    background-color: #f8f3f0; /* 연한 베이지색 배경 */
+    margin: 0;
+    font-family: 'Pretendard', sans-serif; /* 폰트가 깔끔해야 호버도 예쁩니다 */
+}
+
+#game_list_container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.list_title {
+    color: #5d4e37;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+/* 1. 상단 상태바 전체 */
+.My_status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5d4e37;
+    padding: 12px 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(93, 78, 55, 0.15);
+    margin-bottom: 20px;
+}
+
+.current_player {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff; /* 흰색으로 반전 */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 2. 점수 캡슐 컨테이너 */
+.score_container {
+    display: inline-flex; 
+    align-items: center; /* baseline 대신 center로 잡고 미세조정하는 게 더 정확할 때가 많습니다 */
+    background-color: #5d4e37; 
+    padding: 8px 20px;
+    border-radius: 50px;
+    gap: 6px; 
+}
+
+/* 3. MY SCORE 라벨 */
+#Seungu{
+    filter: brightness(0) invert(1);
+}
+
+.score_label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+}
+
+/* 4. 점수 숫자 (가장 크게) */
+.score_value {
+    color: #ffde59;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1;
+    font-family: 'Arial Black', sans-serif;
+    display: inline-block;
+}
+
+/* 5. pts 단위 */
+.score_unit {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+}
+
+/* 2. 게임 카드 개별 박스 */
+.game_card {
+    background: white;
+    border-radius: 20px; /* 조금 더 둥글게 수정 */
+    padding: 22px 35px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* 그림자를 더 부드럽게 */
+    transition: transform 0.2s ease;
+}
+
+/* 카드 전체에도 살짝 호버 효과 (선택사항) */
+.game_card:hover {
+    transform: scale(1.01); /* 마우스 올리면 카드 전체가 아주 살짝 커짐 */
+}
+
+.game_info {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #5d4e37;
+}
+
+.game_number { margin-right: 8px; opacity: 0.7; }
+.status_text { margin-left: 10px; color: #8c7b65; font-weight: 500; }
+
+/* 3. 버튼 기본 스타일 및 호버 업데이트 */
+.game_buttons {
+    display: flex;
+    gap: 12px; /* 간격을 살짝 더 넓힘 */
+}
+
+.game_buttons a, .game_buttons button {
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 훨씬 부드러운 애니메이션 */
+}
+
+/* [반격하기] 버튼: 떠오르는 효과 */
+.btn_attack { 
+    background-color: #8c7b65; 
+    color: white; 
+}
+.btn_attack:hover { 
+    background-color: #5d4e37; 
+    transform: translateY(-4px); /* 위로 쏙 올라감 */
+    box-shadow: 0 6px 12px rgba(93, 78, 55, 0.2); 
+}
+
+/* [게임 취소] 버튼: 빨간색 강조 효과 */
+.btn_cancel { 
+    background-color: #e0e0e0; 
+    color: #777; 
+}
+.btn_cancel:hover { 
+    background-color: #ffebee; /* 연분홍 배경 */
+    color: #d32f2f; /* 빨간색 글씨 */
+    transform: scale(1.05); /* 살짝 커짐 */
+}
+
+/* [게임 정보] 버튼: 색상 채우기 효과 */
+.btn_detail { 
+    background-color: transparent; 
+    border: 1.5px solid #8c7b65 !important; 
+    color: #8c7b65; 
+    box-sizing: border-box;
+}
+.btn_detail:hover { 
+    background-color: #8c7b65; 
+    color: white; 
+}
+
+/* 클릭했을 때 살짝 눌리는 효과 */
+.game_buttons a:active, .game_buttons button:active {
+    transform: scale(0.95);
+}

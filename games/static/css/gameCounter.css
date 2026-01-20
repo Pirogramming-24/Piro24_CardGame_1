@@ -1,0 +1,120 @@
+
+
+.main_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.main_container h1 {
+    color: #8B6F47;
+    background-color: #F7F4EF;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.main_container h3 {
+    color: #8B6F47;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+.main_container .game_info {
+    background: white;
+    width: 100%;
+    max-width: 380px;
+    padding: 28px 24px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    
+}
+.main_container .game_info h3 {
+    color: #8B6F47;
+    font-weight: 800;
+    font-size: 14px;
+
+}
+.main_container .game_info hr {
+    background-color: #8B6F47;
+    height: 2px;
+    border: none;
+}
+.main_container .game_info .game_box {
+    padding: 20px 20px;
+}
+
+
+.main_container .game_info .game_box .cards {
+    display: flex;
+    justify-content: center; 
+    gap: 10px;               
+    margin-bottom: 40px;     
+    margin-top: 20px;
+}
+
+.main_container .game_info .game_box .cards input[type="radio"] {
+    display: none;
+}
+
+.main_container .game_info .game_box .cards .card-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 50px;             
+    height: 70px;           
+    
+    background-color: white;
+    border: 1px solid #8B6F47;
+    border-radius: 8px;      
+    
+    color: #8B6F47;         
+    font-size: 20px;        
+    font-weight: bold;
+    cursor: pointer;        
+    transition: all 0.2s;   
+}
+
+.main_container .game_info .game_box .cards .card-item:hover {
+    background-color: #F7F4EF; 
+    transform: translateY(-3px); 
+}
+
+.main_container .game_info .game_box .cards input[type="radio"]:checked + .card-item {
+    background-color: #8B6F47; 
+    color: white;              
+    box-shadow: 0 4px 10px rgba(139, 111, 71, 0.4); 
+    transform: translateY(-5px); 
+}
+.main_container .game_info .game_box p {
+    font-weight: 800;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+.main_container .game_info .game_box .buttons {
+    display: flex;       
+    width: 100%;         
+    gap: 10px;
+
+}
+.main_container .game_info .game_box .buttons button {
+    background-color: #8B6F47;
+    color: white;
+    font-size: 14px;
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 50%;
+    cursor: pointer;
+}
+.main_container .game_info .game_box .buttons .gameList {
+    border: 1px solid #8B6F47;
+    border-radius: 8px;
+    color: #8B6F47;
+    background-color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    width: 50%;
+    display: block;
+    text-align: center;
+}

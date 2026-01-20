@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>반격 테스트</title>
+</head>
+<body>
+    <h2>{{ game.id }}번 게임 반격 테스트</h2>
+    <p>공격자: {{ game.Attacker }} (카드: 비밀)</p>
+    <p>방어자: {{ game.Defender }} (나)</p>
+
+    <form method="POST" action="{% url 'games:counter_attack' game.pk %}">
+        {% csrf_token %}
+        <label>낼 카드 선택:</label>
+        <select name="selected_card">
+            <option value="1">1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+        </select>
+        <button type="submit">반격하기 (POST 전송)</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% block content %}
+{% load static %}
+
+<section class="auth">
+    <div class="auth-header">
+        <h1 class="auth-title">로그인</h1>
+        <p class="auth-desc">로그인하여 게임을 시작하세요</p>
+    </div>
+
+    <div class="auth-card">
+        <form method="post" action="{% url 'accounts:login' %}">
+            {% csrf_token %}
+            {{form.errors}}
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="login" required>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn primary">로그인</button>
+        </form>
+    </div>
+
+    <div class="social-login">
+        <a href="{% provider_login_url 'naver' %}" style="text-decoration:none;">
+            <button class="btn naver"><img src="{% static 'images/naver-logo.png' %}" alt="naver-logo">Naver로 로그인</button>
+        </a>
+
+        <a href="{% provider_login_url 'google' %}" style="text-decoration:none;">
+            <button class="btn google"><img src="{% static 'images/google-logo.png' %}" alt="google-logo">Google로 로그인</button>
+        </a>
+    </div>
+
+    <div class="auth-footer">
+        계정이 없으신가요?
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
+    </div>     
+
+</section>
+
+{% endblock %}

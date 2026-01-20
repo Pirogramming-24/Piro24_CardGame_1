@@ -1,0 +1,17 @@
+# VS Code 관련 설정 폴더 제외
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+*.egg-info/
+
+# Django
+db.sqlite3
+.env
+*.log
+media/
+
+# OS
+.DS_Store
